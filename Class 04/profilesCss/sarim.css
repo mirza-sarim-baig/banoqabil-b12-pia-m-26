@@ -1,0 +1,39 @@
+/* h1, h2, h3{
+    text-align: center;
+    color: #496f95;
+    font-family: 'Arial', sans-serif;
+} */
+
+*{
+     font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+} 
+
+.note{
+    color: blueviolet;
+    line-height: 1.5;
+}
+
+h1{
+    font-size: 100px;
+}
+
+.note::first-letter{
+    font-size: 200%;
+    color: #496f95;
+    }
+
+    a:link{
+        color: green;
+    }
+    a:visited{
+        color: red;
+    }
+    a:focus{
+        color: blue;
+    }
+    a:active{
+        color: yellow;
+    }

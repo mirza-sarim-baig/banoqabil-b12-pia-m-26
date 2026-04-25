@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <title>Forms</title>
+    <link
+      rel="shortcut icon"
+      href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt6sNPPmXdhvNiqpujezurd8hRYHn5q9w68w&s"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <h1>Html Forms</h1>
+    <input type="date" />
+    <input type="radio" />
+
+    <fieldset>
+      <legend>Contact us</legend>
+      <label>
+        Name:
+        <input type="text" name="name" />
+      </label>
+      <br />
+      <br />
+      <label>
+        Email:
+        <input type="email" name="email" />
+      </label>
+      <br />
+      <br />
+      <label>
+        Message:
+        <textarea name="message"></textarea>
+      </label>
+      <br />
+      <br />
+      <label>
+        gender:
+        <select name="gender" multiple>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+
+      <h5>Gender</h5>
+      <label>
+        male:
+        <input type="radio" name="gender" value="male" />
+      </label>
+      <label>
+        female:
+        <input type="radio" name="gender" value="female" />
+      </label>
+      <label>
+        other:
+        <input type="radio" name="gender" value="other" />
+      </label>
+
+      <h5>Course</h5>
+      <label>
+        WD1:
+        <input type="checkbox" name="Course" value="WD!" />
+      </label>
+      <label>
+        WD2:
+        <input type="checkbox" name="Course" value="WD2" />
+      </label>
+      <label>
+        WD3:
+        <input type="checkbox" name="Course" value="WD3" />
+      </label>
+      <input type="button" value="Submit" />
+    </fieldset>
+
+    <form>
+      <label>
+        Name:
+        <input type="text" name="name" />
+      </label>
+      <br />
+      <br />
+      <label>
+        Email:
+        <input type="email" name="email" />
+      </label>
+      <br />
+      <br />
+      <label>
+        Message:
+        <textarea name="message"></textarea>
+      </label>
+      <br />
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
