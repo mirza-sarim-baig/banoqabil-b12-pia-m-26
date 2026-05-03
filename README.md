@@ -16,3 +16,11 @@ A structured and beginner-friendly roadmap to learning the fundamentals of web d
 - Flexbox
 - min, max height
 - overflow properties
+
+## **📘 Class 7 — Apple Clone**
+
+## **📘 Class 8 — Positions & Media Queries**
+
+- Absolute, fixed, relative, sticky
+- Media queries
+- git & github

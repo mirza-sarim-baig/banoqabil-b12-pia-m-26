@@ -1,0 +1,109 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    /* position: relative; */
+}
+
+.container img{
+width: 100%;
+height: auto;
+}
+
+.like-btn{
+    height: 20px;
+    width: 20px;
+/* position: absolute; */
+position: fixed;
+    top: 0;
+    right: 0
+
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: sticky;
+    top: 0;
+}
+
+.cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cards-container div{
+    width: 400px;
+    height: 400px;
+    background-color: red;
+    margin: 10px;
+
+}
+
+p{
+    font-size: 50px;
+}
+
+/* MOBILE FIRST  */
+
+/* tablet screen  */
+
+/* @media(min-width: 768px){ */
+    /* .cards-container{
+    flex-direction: row;
+} */
+    /* .cards-container div{
+        background-color: blue;
+    }
+    p{
+    font-size: 16px;
+}
+} */
+/* laptop screen */
+/* @media(min-width:1024px){
+     .cards-container div{
+        background-color: yellow;
+    }
+    p{
+    font-size: 20px;
+}
+} */
+
+
+/* DESKTOP FIRST */
+
+@media(max-width:1439px){
+    .cards-container div{
+        background-color: blue;
+        width: 350px;
+    }
+  
+}
+
+@media(max-width:1199px){
+    .cards-container div{
+        background-color: green;
+        width: 300px;
+    }
+  
+}
+
+@media(max-width:767px){
+    .cards-container div{
+        background-color: wheat;
+        width: 300px;
+    }
+  
+    p{
+        font-size: 20px;
+    }
+}

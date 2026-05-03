@@ -1,0 +1,113 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.container{
+    max-width: 1250px;
+    height: 100%;
+    margin: auto;
+    padding: 0 50px;
+}
+
+.title-head{
+    font-size: 48px;
+        line-height: 1.0834933333;
+        font-weight: 600;
+        letter-spacing: -.002em;
+}
+
+.title-subhead{
+
+        font-size: 24px;
+        line-height: 1.1666666667;
+        font-weight: 400;
+        letter-spacing: .009em;
+        margin-bottom: 20px;
+}
+
+button{
+    cursor: pointer;
+}
+
+.btn-filled-primary{
+    background-color: #0076DF;
+    color: white;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 20px;
+    font-size: 17px;
+}
+
+.btn-outlined-primary{
+    background-color: transparent;
+    color: #0076DF;
+    padding: 10px 28px;
+    border: 1px solid #0076DF;
+    border-radius: 20px;
+    font-size: 17px;
+}
+
+.btn-outlined-primary:hover{
+    background-color: #0076DF;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+header{
+    width: 100%;
+    height: 45px;
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.38);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+position: fixed;
+}
+
+header ul{
+        display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    list-style-type: none;
+}
+
+header ul li a{
+    text-decoration: none;
+    color: black;
+       font-size: 12px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -.01em;
+}   
+
+.hero-section{
+    background-color: rgb(232, 232, 232);
+    width: 100%;
+    height: 90vh;
+    max-height: 600px;
+    background-image: url("./assets/iphone");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0;
+}
+
+.cards-container section{
+    width: 48%;
+}
