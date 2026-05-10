@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>JS</h1>
+    <script>
+      //   console.log("Hello, World!");
+      //   console.log(userName);
+      //   let userName;
+      // keyword, variable name, assignment operator, value, statement terminator
+      //   console.log(userName);
+      //   userName = "John";
+      //   console.log(userName);
+
+      //   DATA TYPES IN JAVASCRIPT
+      //   let name = "John Doe"; // string
+      //   let age = 30; // number
+      //   let isStudent = true; // boolean
+      //   let undefinedVariable; // undefined
+      //   let nullVariable = null; // null
+
+      //   SUM, CONCATINATION, SUBTRACTION
+
+      //   let a = "helo";
+      //   let b = 20;
+      //   let c = 10;
+      //   let d = 20;
+      //   let sum = c + b + a + d;
+      //   minus = a + b; //
+      //   console.log("minus of 3 numbers", minus); //
+      //   console.log("sum of 2 numbers", a + b); // 30
+
+      let revenue = +prompt("Enter the revenue of the phone: ");
+      let purchaseCost = +prompt("Enter the purchase cost of the phone: ");
+      let repairCost = +prompt("Enter the repair cost of the phone: ");
+      let commisionCost = (+prompt("Enter commision") / 100) * revenue;
+      let profite = revenue - purchaseCost - repairCost - commisionCost;
+      console.log("Profite/Loss is " + profite);
+    </script>
+  </body>
+</html>

@@ -24,3 +24,8 @@ A structured and beginner-friendly roadmap to learning the fundamentals of web d
 - Absolute, fixed, relative, sticky
 - Media queries
 - git & github
+
+
+## **📘 Class 10 — Introduction of JS**
+
+- 
