@@ -25,7 +25,14 @@ A structured and beginner-friendly roadmap to learning the fundamentals of web d
 - Media queries
 - git & github
 
-
 ## **📘 Class 10 — Introduction of JS**
 
-- 
+- Console
+- Variables & its datatypes
+- Basic operations
+
+## **📘 Class 11 — JS**
+
+- If Else Conditions
+- Objects
+- Array
