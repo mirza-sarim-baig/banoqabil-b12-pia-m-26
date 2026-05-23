@@ -36,3 +36,7 @@ A structured and beginner-friendly roadmap to learning the fundamentals of web d
 - If Else Conditions
 - Objects
 - Array
+
+## **📘 Class 12 — JS**
+
+- Loops

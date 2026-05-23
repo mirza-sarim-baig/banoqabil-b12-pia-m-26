@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   console.log("1");
+      //   console.log("2");
+      //   console.log("3");
+      //   console.log("4");
+      //   console.log("5");
+      //   console.log("6");
+
+      let users = [
+        { name: "Alice", age: 30 },
+        { name: "Bob", age: 25 },
+        { name: "Charlie", age: 35 },
+      ];
+
+      //   console.log(users[0].name);
+      //   console.log(users[1].name);
+      //   console.log(users[2].name);
+
+      //   key, variable initialization, condition, increment/decrement
+
+      //   var num = +prompt("Enter a number:");
+
+      //   for (var i = 1; i <= 10; i++) {
+      //     console.log("Table", num, "x", i, "=", num * i);
+      //   }
+
+      let usersList = ["jhokio", "ahsan", "bilal", "sarim", "hassaan"];
+
+      let userName = prompt("Enter a username:");
+
+      var userFound = false;
+      for (var j = 0; j < usersList.length; j++) {
+        if (userName == usersList[j]) {
+          console.log("Welcome", usersList[j]);
+          userFound = true;
+          break; // Exit the loop once a match is found
+        }
+      }
+
+      if (!userFound) {
+        console.log("User", userName, " not found in the list.");
+      }
+
+      //   if (userName == usersList[0]) {
+      //     console.log("Welcome", usersList[0]);
+      //   } else if (userName == usersList[1]) {
+      //     console.log("Welcome", usersList[1]);
+      //   } else if (userName == usersList[2]) {
+      //     console.log("Welcome", usersList[2]);
+      //   } else if (userName == usersList[3]) {
+      //     console.log("Welcome", usersList[3]);
+      //   }
+
+      //   console.log("2 x 1 =", 2 * 1);
+      //   console.log("2 x 2 =", 2 * 2);
+      //   console.log("2 x 3 =", 2 * 3);
+      //   console.log("2 x 4 =", 2 * 4);
+
+      //   let count = 1;
+      //   console.log("count 1:", ++count);
+      //   console.log("count 2:", ++count);
+      //   console.log("count 3:", ++count);
+      //   console.log("count 4:", count);
+
+      let usersData = [
+        {
+          id: 1,
+          email: "john@gmail.com",
+          username: "johnd",
+          password: "m38rmF$",
+          name: {
+            firstname: "john",
+            lastname: "doe",
+          },
+        },
+        {
+          id: 2,
+          email: "helo@gmail.com",
+          username: "helod",
+          password: "m38rmF$",
+          name: {
+            firstname: "helo",
+            lastname: "doe",
+          },
+        },
+      ];
+    </script>
+  </body>
+</html>
