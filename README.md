@@ -40,3 +40,16 @@ A structured and beginner-friendly roadmap to learning the fundamentals of web d
 ## **📘 Class 12 — JS**
 
 - Loops
+- Conditions
+
+## **📘 Class 13 — JS**
+
+- Getting data from form
+- Local storage
+- Login and signup functionality
+
+## **📘 Class 14 — JS**
+
+- DOM Manipulation
+- Changing ui with js
+- Bootstrap
