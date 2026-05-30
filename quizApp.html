@@ -1,0 +1,1416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WD1 Quiz — Web Development Fundamentals</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0f;
+        --surface: #12121a;
+        --card: #1a1a26;
+        --border: #2a2a3d;
+        --accent: #7c3aed;
+        --accent2: #06b6d4;
+        --accent3: #f59e0b;
+        --green: #10b981;
+        --red: #ef4444;
+        --text: #e2e8f0;
+        --muted: #64748b;
+        --mono: "Space Mono", monospace;
+        --sans: "Syne", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* grid background */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(124, 58, 237, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .glow {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.12;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .glow-1 {
+        background: var(--accent);
+        top: -200px;
+        right: -100px;
+      }
+      .glow-2 {
+        background: var(--accent2);
+        bottom: -200px;
+        left: -100px;
+      }
+
+      /* ── SCREENS ── */
+      .screen {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      .screen.hidden {
+        display: none;
+      }
+
+      /* ── START SCREEN ── */
+      .start-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 3.5rem 3rem;
+        max-width: 560px;
+        width: 100%;
+        text-align: center;
+        box-shadow:
+          0 0 60px rgba(124, 58, 237, 0.12),
+          0 24px 48px rgba(0, 0, 0, 0.4);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(124, 58, 237, 0.15);
+        border: 1px solid rgba(124, 58, 237, 0.35);
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: #a78bfa;
+        letter-spacing: 0.08em;
+        margin-bottom: 1.5rem;
+      }
+
+      .start-card h1 {
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 0.75rem;
+        background: linear-gradient(
+          135deg,
+          #fff 0%,
+          #a78bfa 60%,
+          var(--accent2) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .start-card p {
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .info-item {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem 0.5rem;
+      }
+
+      .info-item .num {
+        font-family: var(--mono);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent2);
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .info-item .lbl {
+        font-size: 0.75rem;
+        color: var(--muted);
+        font-family: var(--mono);
+      }
+
+      .name-wrap {
+        margin-bottom: 1.5rem;
+        text-align: left;
+      }
+
+      .name-wrap label {
+        display: block;
+        font-size: 0.8rem;
+        font-family: var(--mono);
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        margin-bottom: 8px;
+      }
+
+      .name-wrap input {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px 16px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .name-wrap input:focus {
+        border-color: var(--accent);
+      }
+
+      .btn-start {
+        width: 100%;
+        background: linear-gradient(135deg, var(--accent), #9333ea);
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        color: #fff;
+        font-family: var(--sans);
+        font-size: 1.05rem;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.03em;
+        transition:
+          opacity 0.2s,
+          transform 0.15s;
+      }
+
+      .btn-start:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .btn-start:active {
+        transform: translateY(0);
+      }
+
+      /* ── QUIZ SCREEN ── */
+      .quiz-layout {
+        width: 100%;
+        max-width: 760px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      /* top bar */
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1rem 1.5rem;
+        gap: 1rem;
+      }
+
+      .q-counter {
+        font-family: var(--mono);
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .q-counter span {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .timer-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 8px 14px;
+        font-family: var(--mono);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--accent2);
+        transition: color 0.3s;
+      }
+
+      .timer-box.danger {
+        color: var(--red);
+        animation: pulse 0.8s infinite;
+        border-color: rgba(239, 68, 68, 0.4);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      /* progress */
+      .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: var(--border);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        border-radius: 99px;
+        transition: width 0.4s ease;
+      }
+
+      /* question card */
+      .q-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .q-topic {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .q-topic::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+      }
+
+      .q-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.55;
+        color: #f1f5f9;
+        margin-bottom: 1.5rem;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+
+      .opt-btn {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        padding: 12px 16px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 0.95rem;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.18s;
+      }
+
+      .opt-btn:hover:not(:disabled) {
+        border-color: var(--accent);
+        background: rgba(124, 58, 237, 0.08);
+        transform: translateX(4px);
+      }
+
+      .opt-btn.selected {
+        border-color: var(--accent);
+        background: rgba(124, 58, 237, 0.15);
+      }
+
+      .opt-btn.correct {
+        border-color: var(--green);
+        background: rgba(16, 185, 129, 0.12);
+        color: #6ee7b7;
+      }
+
+      .opt-btn.wrong {
+        border-color: var(--red);
+        background: rgba(239, 68, 68, 0.1);
+        color: #fca5a5;
+      }
+
+      .opt-letter {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        transition: background 0.18s;
+      }
+
+      .opt-btn.selected .opt-letter {
+        background: var(--accent);
+      }
+      .opt-btn.correct .opt-letter {
+        background: var(--green);
+        color: #fff;
+      }
+      .opt-btn.wrong .opt-letter {
+        background: var(--red);
+        color: #fff;
+      }
+
+      .nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .btn-nav {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 20px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+
+      .btn-nav:hover {
+        border-color: var(--accent);
+        color: #a78bfa;
+      }
+      .btn-nav:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+
+      .btn-submit {
+        background: linear-gradient(135deg, var(--accent), #9333ea);
+        border: none;
+        border-radius: 10px;
+        padding: 10px 24px;
+        color: #fff;
+        font-family: var(--sans);
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          opacity 0.2s,
+          transform 0.15s;
+      }
+
+      .btn-submit:hover {
+        opacity: 0.88;
+        transform: translateY(-1px);
+      }
+
+      .skip-info {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      /* ── RESULT SCREEN ── */
+      .result-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 3rem 2.5rem;
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+        box-shadow:
+          0 0 80px rgba(124, 58, 237, 0.15),
+          0 24px 48px rgba(0, 0, 0, 0.4);
+        animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.88);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .result-emoji {
+        font-size: 4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .result-name {
+        font-size: 0.85rem;
+        font-family: var(--mono);
+        color: var(--muted);
+        margin-bottom: 0.4rem;
+      }
+
+      .result-grade-label {
+        font-size: 1rem;
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+      }
+
+      .score-display {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .score-big {
+        font-size: 5rem;
+        font-weight: 800;
+        font-family: var(--mono);
+        background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+      }
+
+      .score-denom {
+        font-size: 2rem;
+        font-family: var(--mono);
+        color: var(--muted);
+      }
+
+      .scaled-score {
+        font-family: var(--mono);
+        font-size: 0.9rem;
+        color: var(--accent2);
+        margin-bottom: 2rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem 0.5rem;
+      }
+
+      .stat-box .sv {
+        font-family: var(--mono);
+        font-size: 1.4rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .stat-box .sl {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-family: var(--mono);
+      }
+
+      .sv.correct-c {
+        color: var(--green);
+      }
+      .sv.wrong-c {
+        color: var(--red);
+      }
+      .sv.skip-c {
+        color: var(--accent3);
+      }
+
+      .grade-badge {
+        display: inline-block;
+        padding: 10px 28px;
+        border-radius: 999px;
+        font-family: var(--mono);
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        margin-bottom: 2rem;
+      }
+
+      .grade-A {
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid var(--green);
+        color: #6ee7b7;
+      }
+      .grade-B {
+        background: rgba(6, 182, 212, 0.15);
+        border: 1px solid var(--accent2);
+        color: #67e8f9;
+      }
+      .grade-C {
+        background: rgba(245, 158, 11, 0.15);
+        border: 1px solid var(--accent3);
+        color: #fcd34d;
+      }
+      .grade-D {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid var(--red);
+        color: #fca5a5;
+      }
+
+      .btn-retry {
+        background: linear-gradient(135deg, var(--accent), #9333ea);
+        border: none;
+        border-radius: 12px;
+        padding: 13px 36px;
+        color: #fff;
+        font-family: var(--sans);
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          opacity 0.2s,
+          transform 0.15s;
+      }
+
+      .btn-retry:hover {
+        opacity: 0.88;
+        transform: translateY(-1px);
+      }
+
+      /* scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 99px;
+      }
+
+      @media (max-width: 520px) {
+        .start-card,
+        .result-card {
+          padding: 2rem 1.5rem;
+        }
+        .info-grid,
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .q-card {
+          padding: 1.4rem;
+        }
+        .score-big {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <!-- START SCREEN -->
+    <div id="startScreen" class="screen">
+      <div class="start-card">
+        <div class="badge">⚡ WD1 ASSESSMENT</div>
+        <h1>Web Dev Fundamentals Quiz</h1>
+        <p>
+          Test your knowledge of CSS, Flexbox, Positions, JavaScript, DOM, and
+          more covered in WD1.
+        </p>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="num">50</span><span class="lbl">Questions</span>
+          </div>
+          <div class="info-item">
+            <span class="num">25<small style="font-size: 0.8rem">m</small></span
+            ><span class="lbl">Time Limit</span>
+          </div>
+          <div class="info-item">
+            <span class="num">50</span><span class="lbl">Total Marks</span>
+          </div>
+        </div>
+        <div class="name-wrap">
+          <label>STUDENT NAME</label>
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter your full name..."
+          />
+        </div>
+        <button class="btn-start" onclick="startQuiz()">Start Quiz →</button>
+      </div>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quizScreen" class="screen hidden">
+      <div class="quiz-layout">
+        <div class="top-bar">
+          <div class="q-counter">
+            Question <span id="qNum">1</span> of <span>50</span>
+          </div>
+          <div class="timer-box" id="timerBox">
+            ⏱ <span id="timerDisplay">25:00</span>
+          </div>
+          <div class="skip-info" id="skipInfo">0 skipped</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 2%"></div>
+        </div>
+        <div class="q-card" id="questionCard">
+          <!-- dynamically rendered -->
+        </div>
+        <div class="nav-row">
+          <button class="btn-nav" id="btnPrev" onclick="navigate(-1)" disabled>
+            ← Prev
+          </button>
+          <button class="btn-nav" onclick="skipQuestion()">Skip</button>
+          <button class="btn-submit" id="btnNext" onclick="navigate(1)">
+            Next →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="resultScreen" class="screen hidden">
+      <div class="result-card">
+        <div class="result-emoji" id="resultEmoji">🎉</div>
+        <div class="result-name" id="resultName"></div>
+        <div class="score-display">
+          <div class="score-big" id="scoreBig">0</div>
+          <div class="score-denom">/50</div>
+        </div>
+        <div class="scaled-score" id="scaledScore">Scaled: 0 / 10</div>
+        <div class="grade-badge" id="gradeBadge">—</div>
+        <div class="result-grade-label" id="gradeLabel"></div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="sv correct-c" id="correctCount">0</span
+            ><span class="sl">Correct</span>
+          </div>
+          <div class="stat-box">
+            <span class="sv wrong-c" id="wrongCount">0</span
+            ><span class="sl">Wrong</span>
+          </div>
+          <div class="stat-box">
+            <span class="sv skip-c" id="skipCount">0</span
+            ><span class="sl">Skipped</span>
+          </div>
+        </div>
+        <button class="btn-retry" onclick="retryQuiz()">Try Again ↺</button>
+      </div>
+    </div>
+
+    <script>
+      const questions = [
+        // CSS
+        {
+          topic: "CSS Properties",
+          q: "Which CSS property controls the space between the border and the content of an element?",
+          opts: ["margin", "padding", "spacing", "border-gap"],
+          ans: 1,
+        },
+        {
+          topic: "CSS Properties",
+          q: "What does 'display: inline-block' do?",
+          opts: [
+            "Element takes full width like block",
+            "Element flows inline but respects width/height",
+            "Element is removed from flow",
+            "Element becomes flexbox container",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "CSS Properties",
+          q: "Which property adds a shadow outside an element's border?",
+          opts: ["text-shadow", "box-shadow", "drop-shadow", "element-shadow"],
+          ans: 1,
+        },
+        {
+          topic: "CSS Box Model",
+          q: "In the CSS box model, which layer is outermost?",
+          opts: ["Content", "Padding", "Border", "Margin"],
+          ans: 3,
+        },
+        {
+          topic: "CSS Properties",
+          q: "What is the default display value of a <div>?",
+          opts: ["inline", "block", "inline-block", "flex"],
+          ans: 1,
+        },
+        // Flexbox
+        {
+          topic: "Flexbox",
+          q: "Which CSS property turns an element into a flex container?",
+          opts: [
+            "flex: 1",
+            "display: flex",
+            "flex-direction: row",
+            "align-items: flex",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "Flexbox",
+          q: "Which property aligns flex items along the cross axis?",
+          opts: ["justify-content", "align-items", "align-self", "flex-align"],
+          ans: 1,
+        },
+        {
+          topic: "Flexbox",
+          q: "What does 'justify-content: space-between' do?",
+          opts: [
+            "Items are centered",
+            "Equal space around items",
+            "First and last items at edges, equal space between",
+            "Items stretch to fill container",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "Flexbox",
+          q: "Which property sets the overflow to scroll when content exceeds height?",
+          opts: [
+            "overflow: hidden",
+            "overflow: scroll",
+            "overflow: auto",
+            "clip: scroll",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "Flexbox",
+          q: "What does 'flex-wrap: wrap' do?",
+          opts: [
+            "Items shrink to fit in one line",
+            "Items wrap to next line when overflow",
+            "Container becomes a grid",
+            "Items are stacked vertically",
+          ],
+          ans: 1,
+        },
+        // Positions
+        {
+          topic: "Positions",
+          q: "Which position value removes an element from the normal document flow and positions it relative to the nearest positioned ancestor?",
+          opts: ["relative", "fixed", "absolute", "sticky"],
+          ans: 2,
+        },
+        {
+          topic: "Positions",
+          q: "A 'fixed' positioned element is positioned relative to:",
+          opts: [
+            "Its parent element",
+            "The nearest positioned ancestor",
+            "The viewport",
+            "The body element",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "Positions",
+          q: "Which position value keeps an element in the normal flow but scrolls with the page until a threshold, then sticks?",
+          opts: ["absolute", "sticky", "fixed", "relative"],
+          ans: 1,
+        },
+        {
+          topic: "Media Queries",
+          q: "What is the correct syntax to apply styles only when screen width is 768px or less?",
+          opts: [
+            "@screen max-width: 768px",
+            "@media (max-width: 768px)",
+            "@media screen 768",
+            "@responsive max: 768",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "Media Queries",
+          q: "Media queries are primarily used for:",
+          opts: [
+            "Animating elements",
+            "Responsive design across screen sizes",
+            "Adding JavaScript events",
+            "Fetching data",
+          ],
+          ans: 1,
+        },
+        // JS Basics
+        {
+          topic: "JS Basics",
+          q: "Which keyword declares a variable that cannot be reassigned?",
+          opts: ["var", "let", "const", "fixed"],
+          ans: 2,
+        },
+        {
+          topic: "JS Basics",
+          q: "What is the output of: typeof 42?",
+          opts: ['"number"', '"integer"', '"float"', '"digit"'],
+          ans: 0,
+        },
+        {
+          topic: "JS Basics",
+          q: "Which of these is NOT a valid JavaScript data type?",
+          opts: ["string", "boolean", "integer", "undefined"],
+          ans: 2,
+        },
+        {
+          topic: "JS Basics",
+          q: "What does console.log() do?",
+          opts: [
+            "Creates a new variable",
+            "Prints output to the browser console",
+            "Alerts the user",
+            "Logs to a file",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "JS Basics",
+          q: "What is the result of: 5 + '3' in JavaScript?",
+          opts: ["8", "53", "NaN", "Error"],
+          ans: 1,
+        },
+        // JS Conditions
+        {
+          topic: "JS Conditions",
+          q: "Which operator checks both value AND type equality in JavaScript?",
+          opts: ["==", "=", "===", "!="],
+          ans: 2,
+        },
+        {
+          topic: "JS Conditions",
+          q: "What does the following code do? if (x > 5) { ... } else { ... }",
+          opts: [
+            "Loops through values",
+            "Runs one block or the other based on condition",
+            "Defines a function",
+            "Declares a variable",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "JS Conditions",
+          q: "Which keyword is used to exit a switch statement case?",
+          opts: ["exit", "stop", "break", "end"],
+          ans: 2,
+        },
+        {
+          topic: "JS Conditions",
+          q: "What is the output of: let x = 10; console.log(x > 5 ? 'yes' : 'no')?",
+          opts: ["yes", "no", "true", "10"],
+          ans: 0,
+        },
+        // JS Objects
+        {
+          topic: "JS Objects",
+          q: "How do you access the 'name' property of an object called 'person'?",
+          opts: ["person->name", "person.name", "person[name]", "person::name"],
+          ans: 1,
+        },
+        {
+          topic: "JS Objects",
+          q: "Which syntax correctly creates a JavaScript object?",
+          opts: [
+            "let obj = [name: 'Ali']",
+            "let obj = {name: 'Ali'}",
+            "let obj = (name: 'Ali')",
+            "let obj = <name: 'Ali'>",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "JS Objects",
+          q: "How do you add a new property 'age' = 20 to an existing object 'user'?",
+          opts: [
+            "user.age == 20",
+            "user.age = 20",
+            "user->age = 20",
+            "user[age] = 20",
+          ],
+          ans: 1,
+        },
+        // JS Arrays
+        {
+          topic: "JS Arrays",
+          q: "What does the push() method do in JavaScript?",
+          opts: [
+            "Removes the first element",
+            "Adds element to the beginning",
+            "Adds element to the end",
+            "Sorts the array",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "JS Arrays",
+          q: "How do you access the first element of an array called 'arr'?",
+          opts: ["arr[1]", "arr.first()", "arr[0]", "arr.start"],
+          ans: 2,
+        },
+        {
+          topic: "JS Arrays",
+          q: "Which method removes the last element from an array?",
+          opts: ["shift()", "pop()", "remove()", "splice()"],
+          ans: 1,
+        },
+        {
+          topic: "JS Arrays",
+          q: "What is the output of: [1,2,3].length?",
+          opts: ["2", "3", "4", "undefined"],
+          ans: 1,
+        },
+        // JS Loops
+        {
+          topic: "JS Loops",
+          q: "What does a 'for' loop require to work correctly?",
+          opts: [
+            "Only an initial value",
+            "Only a condition",
+            "Initialization, condition, and increment",
+            "Just a body",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "JS Loops",
+          q: "Which loop always executes its body at least once?",
+          opts: ["for loop", "while loop", "do...while loop", "for...of loop"],
+          ans: 2,
+        },
+        {
+          topic: "JS Loops",
+          q: "What does 'break' do inside a loop?",
+          opts: [
+            "Skips current iteration",
+            "Exits the loop immediately",
+            "Restarts the loop",
+            "Pauses the loop",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "JS Loops",
+          q: "What does 'continue' do inside a loop?",
+          opts: [
+            "Exits the loop",
+            "Restarts the loop from beginning",
+            "Skips the current iteration and moves to next",
+            "Stops all scripts",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "JS Loops",
+          q: "Which method iterates over each element of an array and runs a callback?",
+          opts: ["map()", "filter()", "forEach()", "reduce()"],
+          ans: 2,
+        },
+        // Local Storage
+        {
+          topic: "Local Storage",
+          q: "How do you store a value in localStorage?",
+          opts: [
+            "localStorage.store('key','val')",
+            "localStorage.setItem('key','val')",
+            "localStorage.save('key','val')",
+            "localStorage['key'] = 'val' using .save()",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "Local Storage",
+          q: "How do you retrieve an item from localStorage?",
+          opts: [
+            "localStorage.getItem('key')",
+            "localStorage.fetch('key')",
+            "localStorage.read('key')",
+            "localStorage.item('key')",
+          ],
+          ans: 0,
+        },
+        {
+          topic: "Local Storage",
+          q: "localStorage data is:",
+          opts: [
+            "Cleared when tab closes",
+            "Cleared when session ends",
+            "Persistent until manually cleared or code clears it",
+            "Stored on the server",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "Local Storage",
+          q: "localStorage can only store data as:",
+          opts: ["Numbers", "Objects directly", "Strings", "Any data type"],
+          ans: 2,
+        },
+        {
+          topic: "Local Storage",
+          q: "Which method removes a specific item from localStorage?",
+          opts: [
+            "localStorage.delete('key')",
+            "localStorage.clear('key')",
+            "localStorage.removeItem('key')",
+            "localStorage.destroy('key')",
+          ],
+          ans: 2,
+        },
+        // DOM
+        {
+          topic: "DOM Manipulation",
+          q: "Which method selects an element by its id?",
+          opts: [
+            "document.querySelector('#id')",
+            "document.getElement('id')",
+            "document.getElementById('id')",
+            "Both A and C",
+          ],
+          ans: 3,
+        },
+        {
+          topic: "DOM Manipulation",
+          q: "How do you change the text content of a DOM element called 'el'?",
+          opts: [
+            "el.text = 'Hello'",
+            "el.innerHTML = 'Hello'",
+            "el.textContent = 'Hello'",
+            "Both B and C",
+          ],
+          ans: 3,
+        },
+        {
+          topic: "DOM Manipulation",
+          q: "Which method adds a new CSS class to a DOM element?",
+          opts: [
+            "el.addClas('name')",
+            "el.classList.add('name')",
+            "el.class.add('name')",
+            "el.style.add('name')",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "DOM Manipulation",
+          q: "How do you listen for a click event on a button element?",
+          opts: [
+            "button.onClick = fn",
+            "button.listen('click', fn)",
+            "button.addEventListener('click', fn)",
+            "button.on('click', fn)",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "DOM Manipulation",
+          q: "What does document.querySelector('.box') select?",
+          opts: [
+            "Element with id 'box'",
+            "First element with class 'box'",
+            "All elements with class 'box'",
+            "Element with name 'box'",
+          ],
+          ans: 1,
+        },
+        // Forms
+        {
+          topic: "Forms & JS",
+          q: "How do you get the value a user typed in an input field with id='email'?",
+          opts: [
+            "document.getElementById('email').text",
+            "document.getElementById('email').value",
+            "document.getElementById('email').content",
+            "document.getForm('email')",
+          ],
+          ans: 1,
+        },
+        {
+          topic: "Forms & JS",
+          q: "Which event fires when a form is submitted?",
+          opts: ["onchange", "oninput", "onsubmit", "onclick"],
+          ans: 2,
+        },
+        {
+          topic: "Forms & JS",
+          q: "How do you prevent the default form submission behaviour in JavaScript?",
+          opts: [
+            "event.stop()",
+            "event.cancel()",
+            "event.preventDefault()",
+            "return null",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "JS Functions",
+          q: "Which is the correct way to define a function in JavaScript?",
+          opts: [
+            "function = myFunc() {}",
+            "def myFunc() {}",
+            "function myFunc() {}",
+            "func myFunc() {}",
+          ],
+          ans: 2,
+        },
+        {
+          topic: "JS Functions",
+          q: "What is an arrow function syntax for adding two numbers?",
+          opts: [
+            "add = (a, b) -> a + b",
+            "const add = (a,b) => a + b",
+            "function add => (a,b) { a+b }",
+            "const add = function(a,b) a+b",
+          ],
+          ans: 1,
+        },
+      ];
+
+      let currentQ = 0;
+      let answers = new Array(50).fill(null);
+      let timerInterval;
+      let timeLeft = 25 * 60;
+      let studentName = "";
+      let quizEnded = false;
+
+      function startQuiz() {
+        studentName =
+          document.getElementById("studentName").value.trim() || "Student";
+        document.getElementById("startScreen").classList.add("hidden");
+        document.getElementById("quizScreen").classList.remove("hidden");
+        renderQuestion();
+        startTimer();
+      }
+
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          updateTimerDisplay();
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endQuiz(true);
+          }
+        }, 1000);
+      }
+
+      function updateTimerDisplay() {
+        const m = Math.floor(timeLeft / 60);
+        const s = timeLeft % 60;
+        document.getElementById("timerDisplay").textContent =
+          `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+        const box = document.getElementById("timerBox");
+        if (timeLeft <= 120) box.classList.add("danger");
+        else box.classList.remove("danger");
+      }
+
+      function renderQuestion() {
+        const q = questions[currentQ];
+        document.getElementById("qNum").textContent = currentQ + 1;
+        document.getElementById("progressFill").style.width =
+          ((currentQ + 1) / 50) * 100 + "%";
+
+        const skipped = answers.filter((a) => a === null).length;
+        document.getElementById("skipInfo").textContent = `${skipped} skipped`;
+
+        const letters = ["A", "B", "C", "D"];
+        let html = `
+    <div class="q-topic">${q.topic}</div>
+    <div class="q-text">Q${currentQ + 1}. ${q.q}</div>
+    <div class="options">
+  `;
+        q.opts.forEach((opt, i) => {
+          let cls = "";
+          if (quizEnded) {
+            if (i === q.ans) cls = "correct";
+            else if (answers[currentQ] === i && i !== q.ans) cls = "wrong";
+          } else {
+            if (answers[currentQ] === i) cls = "selected";
+          }
+          html += `
+      <button class="opt-btn ${cls}" onclick="selectAnswer(${i})" ${quizEnded ? "disabled" : ""}>
+        <span class="opt-letter">${letters[i]}</span>
+        ${opt}
+      </button>`;
+        });
+        html += `</div>`;
+        document.getElementById("questionCard").innerHTML = html;
+
+        document.getElementById("btnPrev").disabled = currentQ === 0;
+        const btnNext = document.getElementById("btnNext");
+        if (currentQ === 49) {
+          btnNext.textContent = "Submit Quiz ✓";
+          btnNext.onclick = () => endQuiz(false);
+          btnNext.className = "btn-submit";
+          btnNext.style.background =
+            "linear-gradient(135deg, #10b981, #059669)";
+        } else {
+          btnNext.textContent = "Next →";
+          btnNext.onclick = () => navigate(1);
+          btnNext.className = "btn-submit";
+          btnNext.style.background = "";
+        }
+      }
+
+      function selectAnswer(idx) {
+        if (quizEnded) return;
+        answers[currentQ] = idx;
+        renderQuestion();
+      }
+
+      function navigate(dir) {
+        currentQ = Math.max(0, Math.min(49, currentQ + dir));
+        renderQuestion();
+      }
+
+      function skipQuestion() {
+        answers[currentQ] = null;
+        if (currentQ < 49) {
+          currentQ++;
+          renderQuestion();
+        }
+      }
+
+      function endQuiz(auto) {
+        quizEnded = true;
+        clearInterval(timerInterval);
+
+        let correct = 0;
+        questions.forEach((q, i) => {
+          if (answers[i] === q.ans) correct++;
+        });
+        const wrong = answers.filter(
+          (a, i) => a !== null && a !== questions[i].ans,
+        ).length;
+        const skipped = answers.filter((a) => a === null).length;
+        const scaled = ((correct / 50) * 10).toFixed(1);
+
+        let grade, gradeClass, emoji, label;
+        if (correct >= 45) {
+          grade = "A+";
+          gradeClass = "grade-A";
+          emoji = "🏆";
+          label = "Outstanding Performance!";
+        } else if (correct >= 40) {
+          grade = "A";
+          gradeClass = "grade-A";
+          emoji = "🎉";
+          label = "Excellent Work!";
+        } else if (correct >= 35) {
+          grade = "B";
+          gradeClass = "grade-B";
+          emoji = "👍";
+          label = "Good Job!";
+        } else if (correct >= 25) {
+          grade = "C";
+          gradeClass = "grade-C";
+          emoji = "📚";
+          label = "Needs Improvement";
+        } else {
+          grade = "D";
+          gradeClass = "grade-D";
+          emoji = "💪";
+          label = "Keep Practising!";
+        }
+
+        document.getElementById("quizScreen").classList.add("hidden");
+        document.getElementById("resultScreen").classList.remove("hidden");
+        document.getElementById("resultEmoji").textContent = emoji;
+        document.getElementById("resultName").textContent = studentName;
+        document.getElementById("scoreBig").textContent = correct;
+        document.getElementById("scaledScore").textContent =
+          `Scaled Score: ${scaled} / 10`;
+        document.getElementById("gradeBadge").textContent = `Grade: ${grade}`;
+        document.getElementById("gradeBadge").className =
+          `grade-badge ${gradeClass}`;
+        document.getElementById("gradeLabel").textContent = label;
+        document.getElementById("correctCount").textContent = correct;
+        document.getElementById("wrongCount").textContent = wrong;
+        document.getElementById("skipCount").textContent = skipped;
+      }
+
+      function retryQuiz() {
+        currentQ = 0;
+        answers = new Array(50).fill(null);
+        timeLeft = 25 * 60;
+        quizEnded = false;
+        document.getElementById("timerBox").classList.remove("danger");
+        document.getElementById("resultScreen").classList.add("hidden");
+        document.getElementById("startScreen").classList.remove("hidden");
+        document.getElementById("studentName").value = "";
+      }
+    </script>
+  </body>
+</html>
